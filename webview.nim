@@ -25,8 +25,8 @@ proc navigate*(webview:Webview,url:cstring) {.importc:"webview_navigate", header
 proc destroy*(webview:Webview) {.importc:"webview_destroy", header:"webview.h".}
 proc run*(webview:Webview) {.importc:"webview_run", header:"webview.h".}
 
-proc listener_bind (webview: Webview, name: cstring, fn: proc (id: cstring; data: cstring) {.cdecl.}, arg: cstring) {.importc:"webview_bind", header:"webview.h".}
-proc listener_return (webview : Webview, id:cstring, status: cint, result: cstring) {.importc:"webview_return", header:"webview.h".}
+proc listener_bind* (webview: Webview, name: cstring, fn: proc (id: cstring; data: cstring) {.cdecl.}, arg: cstring) {.importc:"webview_bind", header:"webview.h".}
+proc listener_return* (webview : Webview, id:cstring, status: cint, result: cstring) {.importc:"webview_return", header:"webview.h".}
 
 template bind_proc* (webview: Webview, name: cstring, actions: proc(payload: JsonNode) : JsonNode) =
   proc callback(id: cstring, raw: cstring){.cdecl, gensym.} =
